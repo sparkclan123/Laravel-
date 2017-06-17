@@ -25,3 +25,10 @@ Route::get('/about', function () {
   
   return view('about');
 });
+
+Route::get('/product/{id?}',function($id=1001){
+    $qty = 0;
+    $name = ['A','B','C'];
+    return view('product', compact('id','qty','name'));
+
+});
