@@ -1,13 +1,12 @@
 <?php
-<<<<<<< HEAD
-echo "ppppppppppppppppppppppppppppppppp";
-=======
 echo "hello Thanwa";
->>>>>>> 5d706cf0ab6661d5813a38259506012367ce7ce5
 echo "world";
 echo "pottest";
 echo "palmsogood";
 echo "palm";
 echo "Edit TOR <BR>";
+echo "Edit TOR <BR>";
+echo "Edit TOasdasdR <BR>";
+echo "Edit asdasd <BR>";
 
 
