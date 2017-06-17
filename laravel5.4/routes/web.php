@@ -11,24 +11,27 @@
 |
 */
 
-Route::get('/', function () {
+//Route::get('/', function () {
   //  return view('welcome');
-  return view('index');
-});
+ // return view('index');
+//});
 
-Route::get('/contact', function () {
+//Route::get('/contact', function () {
   
-  return view('contact');
-});
+ // return view('contact');
+//});
 
-Route::get('/about', function () {
+//Route::get('/about', function () {
   
-  return view('about');
-});
+ // return view('about');
+//});
 
-Route::get('/product/{id?}',function($id=1001){
-    $qty = 0;
-    $name = ['A','B','C'];
-    return view('product', compact('id','qty','name'));
+//Route::get('/product/{id?}',function($id=1001){
+   // $qty = 0;
+   // $name = ['A','B','C'];
+//return view('product', compact('id','qty','name'));
 
-});
+//});
+
+Route::resource('/product','Resource\ProductController');
+Route::resource('employee','EmployeeController');
