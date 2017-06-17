@@ -1,4 +1,4 @@
 <?php
-echo "hello";
+echo "hello Thanwa";
 echo "world";
 echo "pottest";
