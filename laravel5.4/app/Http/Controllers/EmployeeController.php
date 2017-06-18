@@ -12,6 +12,16 @@ class EmployeeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+     public function __construct(){
+          $this->middleware('auth')
+          //เข้าไม่ได้เฉพาะ create edit
+          ->only(['create', 'edit']);
+         //เข้าได้หมดยกเว้นindex
+
+         //->except(['index']);
+     }
+
+
     public function index()
     {
        
@@ -38,7 +48,11 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        return 'create';
+
+
+        return view('employess.create');
+
+
     }
 
     /**
@@ -49,8 +63,27 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $rules = [
+            'first_name'=> 'required',
+            'last_name' => 'required'
+        ];
+
+        $input = request()->except(['_token']);
+     //validate คือการกำหนดข้อมูลที่จะทำการบันทึกให้มีเงื่อนไขในการกรอก
+        $this->validate($request, $rules);
+
+    try{
+    DB::table('employees')
+        ->insert($input);
+        
+
+    return redirect('/employee');
+
+    } catch(Exception $e){
+        abort(500);
+
+
+    }}
 
     /**
      * Display the specified resource.
@@ -74,7 +107,11 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
-        //
+         $employee = DB::table('employees')
+         ->where('id',$id)
+         ->first();
+
+    return view('employess.edit',compact('employee'));
     }
 
     /**
@@ -86,7 +123,28 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+       
+        $rules = [
+            'first_name'=> 'required',
+            'last_name' => 'required'
+        ];
+
+        $input = request()->except(['_token','_method']);
+     //validate คือการกำหนดข้อมูลที่จะทำการบันทึกให้มีเงื่อนไขในการกรอก
+        $this->validate($request, $rules);
+
+    
+       try {
+            DB::table('employees')
+                ->where('id',$id)
+                ->update($input );
+
+                return redirect('/employee');
+
+
+       }catch (Exception $e){
+           abort(500);
+       }
     }
 
     /**
@@ -97,6 +155,18 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
+        try{
+            DB::table('employees')
+            ->where('id',$id)
+            ->delete();
+
+            session()->flash('message','Delete sucess');
+
+            return redirect('/employee');
+        
+        }catch (Exception $e){
+            abort(500);
+        }
     }
 }

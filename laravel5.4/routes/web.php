@@ -34,4 +34,31 @@
 //});
 
 Route::resource('/product','Resource\ProductController');
+
+Route::get('about',function(){
+  return 'about';
+
+})->middleware('auth');
+
+Route::get('faker', function(){
+  $faker = Faker\Factory::create();
+  DB::table('products')
+    ->insert([
+      'name' => $faker->firstname,
+      'unit' => '',
+      'price' => 100
+
+    ]);
+
+
+  return 'sucess';
+ // dd($faker);
+});
+
+
 Route::resource('employee','EmployeeController');
+
+Route::get('login','AuthController@getLogin')->name('login');
+
+Route::post('login','AuthController@postLogin');
+Route::get('logout','AuthController@logout');

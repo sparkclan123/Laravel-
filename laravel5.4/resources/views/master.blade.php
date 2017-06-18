@@ -11,6 +11,15 @@
 
     <div class="container">
         <h3>Laravel 5.4</h3>
+
+        @if(session()->get('message')!== null)
+        <div class="alert alert-success" role="alert">
+        <strong>{{session()->get('message')}}</strong>
+        </div>
+        @endif
+
+
+
         @include('navbar')
         @section('content')
         @show
